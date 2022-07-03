@@ -1,9 +1,14 @@
-#include <iostream>
-#include "../utility.h"
-#include "../platform/windows/WindowsWindow.h"
+#include "../PlatformDetection.h"
+#include "Game.h"
 
 int main(int argc, char *argv[]) {
-    //WindowsWindow* window = Window.Create();
-    std::cout << "Hello" << std::endl;
+    Game* game = new Game();
+
+    if(game->Initialize()) {
+        game->Start();
+    }
+
+    delete game;
+
     return 0;
 }

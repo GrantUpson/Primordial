@@ -1,0 +1,10 @@
+#ifndef INDARKESTNIGHT_EVENTMANAGEMENTSYSTEM_H
+#define INDARKESTNIGHT_EVENTMANAGEMENTSYSTEM_H
+
+
+class EventManagementSystem {
+
+};
+
+
+#endif
