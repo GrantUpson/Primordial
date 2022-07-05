@@ -10,9 +10,10 @@ set(GLFW_BUILD_DOCS OFF CACHE BOOL "" FORCE)
 set(GLFW_BUILD_TESTS OFF CACHE BOOL "" FORCE)
 set(GLFW_BUILD_EXAMPLES OFF CACHE BOOL "" FORCE)
 
-include_directories(${CMAKE_SOURCE_DIR}/libraries/glm)
-include_directories(${CMAKE_SOURCE_DIR}/libraries/glfw-3.3.7/include/GLFW)
+include_directories(libraries/glm)
+include_directories(libraries/glfw-3.3.7/include/GLFW)
 include_directories(${CMAKE_SOURCE_DIR}/shared)
+add_subdirectory(libraries/glfw-3.3.7)
 
 if(WIN32)
     include_directories(${CMAKE_SOURCE_DIR}/shared/platform/windows)

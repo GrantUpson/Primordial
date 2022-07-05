@@ -1,7 +1,7 @@
 #ifndef INDARKESTNIGHT_UTILITY_H
 #define INDARKESTNIGHT_UTILITY_H
 
-#include "glm.hpp"
+#include "glm/glm.hpp"
 
 using uint64 = std::uint64_t;
 using uint32 = std::uint32_t;
