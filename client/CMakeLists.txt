@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.20)
-project(Launcher LANGUAGES CXX VERSION 1.0.0)
+project(Primordial LANGUAGES CXX VERSION 1.0.0)
 
 set(CMAKE_CXX_STANDARD 23)
 set(SOURCE_FILES source/Main.cpp ../shared/events/Event.h ../shared/Utility.h
@@ -32,6 +32,6 @@ elseif(UNIX AND NOT APPLE)
             ../shared/platform/linux/Window.h)
 endif()
 
-add_executable(Launcher ${SOURCE_FILES})
-target_link_libraries(Launcher LINK_PUBLIC glfw)
-install(TARGETS Launcher RUNTIME)
+add_executable(Primordial ${SOURCE_FILES})
+target_link_libraries(Primordial LINK_PUBLIC glfw)
+install(TARGETS Primordial RUNTIME)

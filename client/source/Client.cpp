@@ -1,5 +1,6 @@
 #include "Client.h"
 
+
 bool Client::Initialize() {
     window = new Window(new WindowData());
 

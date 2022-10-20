@@ -1,5 +1,5 @@
-#ifndef INDARKESTNIGHT_EVENT_H
-#define INDARKESTNIGHT_EVENT_H
+#ifndef PRIMORDIAL_EVENT_H
+#define PRIMORDIAL_EVENT_H
 
 
 class Event {

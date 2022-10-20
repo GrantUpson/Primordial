@@ -1,10 +1,10 @@
-#ifndef INDARKESTNIGHT_WINDOW_H
-#define INDARKESTNIGHT_WINDOW_H
+#ifndef PRIMORDIAL_WINDOW_H
+#define PRIMORDIAL_WINDOW_H
 
 
 #include <string>
 #include <utility>
-#include "../Utility.h"
+#include "Utility.h"
 
 struct WindowData {
     std::string title;

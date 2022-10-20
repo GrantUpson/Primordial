@@ -1,5 +1,5 @@
-#ifndef INDARKESTNIGHT_UTILITY_H
-#define INDARKESTNIGHT_UTILITY_H
+#ifndef PRIMORDIAL_UTILITY_H
+#define PRIMORDIAL_UTILITY_H
 
 #include "glm/glm.hpp"
 

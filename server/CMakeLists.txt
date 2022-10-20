@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.20)
-project(ServerLauncher LANGUAGES CXX VERSION 1.0.0)
+project(PrimordialServer LANGUAGES CXX VERSION 1.0.0)
 
 set(CMAKE_CXX_STANDARD 23)
 set(SOURCE_FILES source/Main.cpp ../shared/events/Event.h ../shared/Utility.h
@@ -23,5 +23,5 @@ elseif(UNIX AND NOT APPLE)
             #../shared/platform/linux/Window.h)
 endif()
 
-add_executable(ServerLauncher ${SOURCE_FILES})
-install(TARGETS ServerLauncher RUNTIME)
+add_executable(PrimordialServer ${SOURCE_FILES})
+install(TARGETS PrimordialServer RUNTIME)

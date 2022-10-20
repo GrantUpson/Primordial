@@ -1,5 +1,5 @@
-#ifndef INDARKESTNIGHT_CLIENT_H
-#define INDARKESTNIGHT_CLIENT_H
+#ifndef PRIMORDIAL_CLIENT_H
+#define PRIMORDIAL_CLIENT_H
 
 
 #include "Window.h"
