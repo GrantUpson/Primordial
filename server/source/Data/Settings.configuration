@@ -1,0 +1,14 @@
+[Server]
+Name =
+Description =
+MotD =
+MaxPlayers =
+PlayerIdleTimeout =
+Password =
+AdministratorPassword =
+
+[Networking]
+Port =
+
+[Gameplay]
+DisablePvP =
