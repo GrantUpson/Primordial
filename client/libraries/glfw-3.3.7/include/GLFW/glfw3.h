@@ -1133,7 +1133,7 @@ extern "C" {
  * GLFW API types
  *************************************************************************/
 
-/*! @brief Client API function pointer type.
+/*! @brief Game API function pointer type.
  *
  *  Generic function pointer used for returning client API function pointers
  *  without forcing a cast from a regular pointer.

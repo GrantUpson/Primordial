@@ -130,7 +130,7 @@ directory named `build` in the root of the source tree.
 
 @subsubsection compile_generate_gui Generating files with the CMake GUI
 
-Start the CMake GUI and set the paths to the source and build directories
+Run the CMake GUI and set the paths to the source and build directories
 described above.  Then press _Configure_ and _Generate_.
 
 If you wish change any CMake variables in the list, press _Configure_ and then

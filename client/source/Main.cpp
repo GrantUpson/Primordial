@@ -1,12 +1,13 @@
-#include "Client.h"
+#include "Game.h"
 
 int main(int argc, char *argv[]) {
-    Client* game = new Client();
+    Game* game = new Game();
 
     if(game->Initialize()) {
-        game->Start();
+        game->Run();
+        game->Shutdown();
     }
 
     delete game;
-    return 0;
+    return EXIT_SUCCESS;
 }

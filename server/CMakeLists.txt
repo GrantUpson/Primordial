@@ -2,9 +2,9 @@ cmake_minimum_required(VERSION 3.20)
 project(PrimordialServer LANGUAGES CXX VERSION 1.0.0)
 
 set(CMAKE_CXX_STANDARD 23)
-set(SOURCE_FILES source/Main.cpp ../shared/events/Event.h ../shared/Utility.h
-        ../shared/PlatformDetection.h ../shared/events/EventManagementSystem.cpp
-        ../shared/events/EventManagementSystem.h)
+set(SOURCE_FILES source/Main.cpp ../shared/events/Event.h ../shared/utility/Utility.h
+        ../shared/platform/PlatformDetection.h ../shared/events/EventManagementSystem.cpp
+        ../shared/events/EventManagementSystem.h source/Server.cpp source/Server.h ../shared/utility/Settings.cpp ../shared/utility/Settings.h)
 
 include_directories(${CMAKE_SOURCE_DIR}/libraries/glm)
 include_directories(${CMAKE_SOURCE_DIR}/shared)

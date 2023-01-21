@@ -4,7 +4,7 @@
 
 #include <string>
 #include <utility>
-#include "Utility.h"
+#include "utility/Utility.h"
 
 struct WindowData {
     std::string title;

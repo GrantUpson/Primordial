@@ -6,10 +6,11 @@ static void error_callback(int error, const char* description) {
 }
 
 Window::Window(const WindowData* data) {
-    std::cout << "MacOS Window\n";
     title = data->title;
     width = data->width;
     height = data->height;
+    vSyncEnabled = data->vSyncEnabled;
+    fullscreenEnabled = data->fullscreenEnabled;
 
     glfwSetErrorCallback(error_callback);
 
@@ -25,10 +26,6 @@ Window::Window(const WindowData* data) {
     }
 
     glfwMakeContextCurrent(window);
-
-    while(!glfwWindowShouldClose(window)) {
-
-    }
 }
 
 void Window::Close() {
@@ -42,4 +39,16 @@ uint32 Window::GetHeight() const {
 
 uint32 Window::GetWidth() const {
     return width;
+}
+
+bool Window::VSyncEnabled() const {
+    return vSyncEnabled;
+}
+
+bool Window::FullscreenEnabled() const {
+    return fullscreenEnabled;
+}
+
+GLFWwindow* Window::GetWindow() {
+    return window;
 }

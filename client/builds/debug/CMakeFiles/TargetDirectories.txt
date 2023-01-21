@@ -1,3 +1,0 @@
-/Users/grantupson/Documents/GitHub/InDarkestNight/client/builds/debug/CMakeFiles/Launcher.dir
-/Users/grantupson/Documents/GitHub/InDarkestNight/client/builds/debug/CMakeFiles/edit_cache.dir
-/Users/grantupson/Documents/GitHub/InDarkestNight/client/builds/debug/CMakeFiles/rebuild_cache.dir

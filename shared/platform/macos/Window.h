@@ -3,18 +3,20 @@
 
 
 #include <string>
-#include "Utility.h"
+#include "utility/Utility.h"
 #include "glfw3.h"
-#include "../../../libraries/glfw-3.3.7/include/GLFW/glfw3.h"
 
 
 struct WindowData {
     std::string title;
     uint32 width;
     uint32 height;
+    bool vSyncEnabled;
+    bool fullscreenEnabled;
 
-    explicit WindowData(std::string title = "In Darkest Night", uint32 width = 1920, uint32 height = 1080) :
-               title(std::move(title)), width(width), height(height) {}
+    explicit WindowData(std::string title = "Primordial", bool fullscreenEnabled = true, uint32 width = 1920, uint32 height = 1080, bool vSyncEnabled = true) :
+            title(std::move(title)), fullscreenEnabled(fullscreenEnabled), width(width), height(height), vSyncEnabled(true) {};
+
 };
 
 class Window {
@@ -24,12 +26,18 @@ public:
 
     uint32 GetWidth() const;
     uint32 GetHeight() const;
+    bool VSyncEnabled() const;
+    bool FullscreenEnabled() const;
+
+    GLFWwindow* GetWindow();
     void Close();
 private:
     std::string title;
     uint32 width;
     uint32 height;
-    GLFWwindow* window;
+    bool vSyncEnabled;
+    bool fullscreenEnabled;
+    GLFWwindow* window; //TODO Native windows window
 };
 
 
