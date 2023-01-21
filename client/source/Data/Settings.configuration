@@ -1,4 +1,6 @@
 [Window]
-ResolutionWidth = 2560
-ResolutionHeight = 1440
-VSyncEnabled = 1
+ResolutionWidth=2560
+ResolutionHeight=1440
+VSyncEnabled=1
+WindowedModeEnabled=0
+ResolutionScale=4

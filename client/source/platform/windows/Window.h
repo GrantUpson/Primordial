@@ -33,6 +33,7 @@ public:
 
     GLFWwindow* GetWindow();
     void Close();
+
 private:
     std::string title;
     uint32 width;

@@ -17,19 +17,21 @@ add_subdirectory(libraries/glfw-3.3.7)
 
 if(WIN32)
     include_directories(${CMAKE_SOURCE_DIR}/shared/platform/windows)
+    include_directories(${CMAKE_SOURCE_DIR}/client/source/platform/windows)
     SET(SOURCE_FILES ${SOURCE_FILES}
-            ../shared/platform/windows/WindowsWindow.cpp
-            ../shared/platform/windows/Window.h)
+            source/platform/windows/WindowsWindow.cpp source/platform/windows/Window.h source/platform/windows/WindowsServerLauncher.cpp source/platform/windows/ServerLauncher.h)
 elseif(APPLE)
     include_directories(${CMAKE_SOURCE_DIR}/shared/platform/macos)
+    include_directories(${CMAKE_SOURCE_DIR}/client/source/platform/macos)
     SET(SOURCE_FILES ${SOURCE_FILES}
-            ../shared/platform/macos/MacOSWindow.cpp
-            ../shared/platform/macos/Window.h)
+            source/platform/macos/MacOSWindow.cpp
+            source/platform/macos/Window.h source/platform/macos/MacosServerLauncher.cpp source/platform/macos/ServerLauncher.h)
 elseif(UNIX AND NOT APPLE)
     include_directories(${CMAKE_SOURCE_DIR}/shared/platform/linux)
+    include_directories(${CMAKE_SOURCE_DIR}/client/source/platform/linux)
     SET(SOURCE_FILES ${SOURCE_FILES}
-            ../shared/platform/linux/LinuxWindow.cpp
-            ../shared/platform/linux/Window.h)
+            source/platform/linux/LinuxWindow.cpp
+            source/platform/linux/Window.h)
 endif()
 
 add_executable(Primordial ${SOURCE_FILES})

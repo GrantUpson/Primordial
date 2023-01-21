@@ -1,20 +1,20 @@
 #include "Game.h"
 #include "utility/Logger.h"
-#include <windows.h>
+#include "ServerLauncher.h"
 #include <iostream>
 #include <filesystem>
 
 
 bool Game::Initialize() {
     isRunning = true;
-    configuration = new Settings();
+    gameSettings = new Settings();
 
-    if(!configuration->Load(std::filesystem::current_path().string() + "\\Data\\Settings.configuration")) {
-        Logger::Log("Could not load settings file.");
+    if(!gameSettings->Load(std::filesystem::current_path().string() + "/Data/Settings.configuration")) {
+        Logger::Log("Client - Could not load settings file.");
         return false;
     }
 
-    auto settings = configuration->GetSettings();
+    auto settings = gameSettings->GetSettings();
 
     window = new Window(new WindowData(
             "Primordial",
@@ -27,13 +27,12 @@ bool Game::Initialize() {
 }
 
 void Game::Run() {
-    std::string temp;
 
-    StartServer();
+    Logger::Log("Client - Before Server Launch");
+    ServerLauncher::StartServer();
+    Logger::Log("Client - After Server Launch");
 
     while(isRunning) {
-        //glClear( GL_COLOR_BUFFER_BIT );
-
         glfwSwapBuffers(window->GetWindow());
         glfwPollEvents();
 
@@ -48,29 +47,3 @@ void Game::Shutdown() {
     window->Close();
 }
 
-
-bool Game::StartServer() {
-    STARTUPINFO startupInfo;
-    PROCESS_INFORMATION processInfo;
-    SECURITY_ATTRIBUTES securityAttributes;
-
-    ZeroMemory(&startupInfo, sizeof(startupInfo));
-    startupInfo.cb = sizeof(startupInfo);
-    ZeroMemory(&processInfo, sizeof(processInfo));
-    ZeroMemory(&securityAttributes, sizeof(securityAttributes));
-
-    std::string serverName = std::filesystem::current_path().string() + "\\Server\\PrimordialServer.exe";
-
-
-    if(CreateProcess(serverName.c_str(), nullptr, nullptr,
-                     nullptr, FALSE, CREATE_NEW_CONSOLE, nullptr, nullptr,
-                     &startupInfo, &processInfo)) {
-
-    } else {
-        Logger::Log("Client - Failed to create server process.");
-    }
-
-
-    //TerminateProcess(processInfo.hProcess, 0);
-    return true;
-}

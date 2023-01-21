@@ -12,10 +12,10 @@ struct WindowData {
     uint32 width;
     uint32 height;
     bool vSyncEnabled;
-    bool fullscreenEnabled;
+    bool windowedModeEnabled;
 
-    explicit WindowData(std::string title = "Primordial", bool fullscreenEnabled = true, uint32 width = 1920, uint32 height = 1080, bool vSyncEnabled = true) :
-            title(std::move(title)), fullscreenEnabled(fullscreenEnabled), width(width), height(height), vSyncEnabled(true) {};
+    explicit WindowData(std::string title = "Primordial", bool windowedModeEnabled = false, uint32 width = 1920, uint32 height = 1080, bool vSyncEnabled = true) :
+            title(std::move(title)), windowedModeEnabled(windowedModeEnabled), width(width), height(height), vSyncEnabled(true) {};
 
 };
 
@@ -27,7 +27,7 @@ public:
     uint32 GetWidth() const;
     uint32 GetHeight() const;
     bool VSyncEnabled() const;
-    bool FullscreenEnabled() const;
+    bool WindowedModeEnabled() const;
 
     GLFWwindow* GetWindow();
     void Close();
@@ -36,7 +36,7 @@ private:
     uint32 width;
     uint32 height;
     bool vSyncEnabled;
-    bool fullscreenEnabled;
+    bool windowedModeEnabled;
     GLFWwindow* window; //TODO Native windows window
 };
 

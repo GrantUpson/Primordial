@@ -8,19 +8,22 @@ void Logger::Log(const std::string& message, bool append) {
     std::ofstream logFile;
 
     if(append) {
-        logFile.open(std::filesystem::current_path().string() + "\\Log\\log.txt", std::ios_base::app);
+        logFile.open(std::filesystem::current_path().string() + "/Log/log.txt", std::ios_base::app);
     } else {
-        logFile.open(std::filesystem::current_path().string() + "\\Log\\log.txt");
+        logFile.open(std::filesystem::current_path().string() + "/Log/log.txt");
     }
 
-    logFile << GetCurrentDateTime() + ": " + message + "\n";
+    logFile << GetCurrentDateTime() + message + "\n";
     logFile.close();
 }
 
 
 std::string Logger::GetCurrentDateTime() {
-    auto const time = std::chrono::current_zone() -> to_local(std::chrono::system_clock::now());
-    return std::format("{:%d-%m-%Y %X}", time);
+    auto currentTime = std::chrono::system_clock::now();
+    time_t convertedTime = std::chrono::system_clock::to_time_t(currentTime);
+    char formattedTime[23];
+    strftime(formattedTime, 23, "%d-%m-%Y %H:%M:%S | ", localtime(&convertedTime));
+    return formattedTime;
 }
 
 

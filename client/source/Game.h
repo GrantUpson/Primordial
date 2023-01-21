@@ -14,11 +14,9 @@ public:
     void Run();
     void Shutdown();
 
-    bool StartServer();
-
 private:
     bool isRunning;
-    Settings* configuration;
+    Settings* gameSettings;
     Window* window;
 };
 

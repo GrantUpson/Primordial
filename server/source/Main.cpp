@@ -1,5 +1,7 @@
 #include <cstdlib>
 #include "Server.h"
+#include "utility/Logger.h"
+
 
 int main(int argc, char *argv[]) {
     Server* server = new Server();
@@ -8,7 +10,7 @@ int main(int argc, char *argv[]) {
         server->Run();
         server->Shutdown();
     } else {
-        //TODO Error to server console
+        Logger::Log("Server - Failed to initialize the server.");
     }
 
     delete server;
