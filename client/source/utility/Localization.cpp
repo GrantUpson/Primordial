@@ -1,45 +1,45 @@
-#include <fstream>
 #include <filesystem>
 #include "Localization.h"
+#include "utility/Utility.h"
 
 
-bool Localization::Load(Languages language) {
+bool Localization::LoadLanguage(Languages language) {
     Localization::strings.clear();
     std::string filepath = std::filesystem::current_path().string() + "/Data/Languages/";
 
     switch(language) {
         case ENGLISH:
-            RetrieveStrings(filepath + "english.lang");
+            Utility::LoadSettingsFile(filepath + "english.lang", strings);
             break;
         case CHINESE:
-            RetrieveStrings(filepath + "chinese.lang");
+            Utility::LoadSettingsFile(filepath + "chinese.lang", strings);
             break;
         case RUSSIAN:
-            RetrieveStrings(filepath + "russian.lang");
+            Utility::LoadSettingsFile(filepath + "russian.lang", strings);
             break;
         case SPANISH:
-            RetrieveStrings(filepath + "spanish.lang");
+            Utility::LoadSettingsFile(filepath + "spanish.lang", strings);
             break;
         case GERMAN:
-            RetrieveStrings(filepath + "german.lang");
+            Utility::LoadSettingsFile(filepath + "german.lang", strings);
             break;
         case FRENCH:
-            RetrieveStrings(filepath + "french.lang");
+            Utility::LoadSettingsFile(filepath + "french.lang", strings);
             break;
         case PORTUGUESE:
-            RetrieveStrings(filepath + "portuguese.lang");
+            Utility::LoadSettingsFile(filepath + "portuguese.lang", strings);
             break;
         case JAPANESE:
-            RetrieveStrings(filepath + "japanese.lang");
+            Utility::LoadSettingsFile(filepath + "japanese.lang", strings);
             break;
         case ITALIAN:
-            RetrieveStrings(filepath + "italian.lang");
+            Utility::LoadSettingsFile(filepath + "italian.lang", strings);
             break;
         case KOREAN:
-            RetrieveStrings(filepath + "korean.lang");
+            Utility::LoadSettingsFile(filepath + "korean.lang", strings);
             break;
         case POLISH:
-            RetrieveStrings(filepath + "polish.lang");
+            Utility::LoadSettingsFile(filepath + "polish.lang", strings);
             break;
         default:
             return false;
@@ -49,23 +49,8 @@ bool Localization::Load(Languages language) {
 }
 
 
-std::string Localization::GetString(std::string id) {
+std::string Localization::GetString(const std::string& id) {
     return Localization::strings[id];
-}
-
-
-void Localization::RetrieveStrings(const std::string& filename) {
-    if(std::ifstream configurationFileStream {filename}; configurationFileStream) {
-        for (std::string line{}; std::getline(configurationFileStream, line); ) {
-            if (line.find('=') != std::string::npos) {
-                std::istringstream iss {line};
-
-                if(std::string key {}, value {}; std::getline(std::getline(iss, key, '=') >> std::ws, value)) {
-                    Localization::strings[key] = value;
-                }
-            }
-        }
-    }
 }
 
 

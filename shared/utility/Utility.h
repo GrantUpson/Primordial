@@ -1,6 +1,9 @@
 #ifndef PRIMORDIAL_UTILITY_H
 #define PRIMORDIAL_UTILITY_H
 
+#include <string>
+#include <unordered_map>
+#include <filesystem>
 #include "glm/glm.hpp"
 
 using uint64 = std::uint64_t;
@@ -16,5 +19,15 @@ using int8 = std::int8_t;
 using Vector2 = glm::vec2;
 using Vector3 = glm::vec3;
 using Vector4 = glm::vec4;
+
+
+class Utility {
+public:
+    Utility() = default;
+    ~Utility() = default;
+
+    static bool LoadSettingsFile(const std::string& filename, std::unordered_map<std::string, std::string>& map);
+    static bool SaveSettingsFile(const std::string& filename, std::unordered_map<std::string, std::string>& map);
+};
 
 #endif

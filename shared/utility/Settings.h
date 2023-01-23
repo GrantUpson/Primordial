@@ -9,11 +9,13 @@ public:
     Settings() = default;
     ~Settings() = default;
 
-    bool Load(const std::string& filename);
-    std::unordered_map<std::string, std::string>& GetSettings();
+    static bool Load(const std::string& filename);
+    static std::string GetSetting(const std::string& key);
+    static void Save(const std::string& key, const std::string& value);
+    static bool SaveToFile(const std::string& filename);
 
 private:
-    std::unordered_map<std::string, std::string> settings {};
+    inline static std::unordered_map<std::string, std::string> settings {};
 };
 
 

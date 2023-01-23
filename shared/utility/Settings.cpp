@@ -1,26 +1,25 @@
-#include <fstream>
 #include <string>
-#include <sstream>
 #include "Settings.h"
+#include "Utility.h"
 
-bool Settings::Load(const std::string& filename) {
-    if(std::ifstream configurationFileStream {filename}; configurationFileStream) {
-        for (std::string line{}; std::getline(configurationFileStream, line); ) {
-            if (line.find('=') != std::string::npos) {
-                std::istringstream iss {line};
 
-                if(std::string key {}, value {}; std::getline(std::getline(iss, key, '=') >> std::ws, value)) {
-                    settings[key] = value;
-                }
-            }
-        }
-        return true;
-    } else {
-        return false;
-    }
+bool Settings::Load(const std::string &filename) {
+    return Utility::LoadSettingsFile(filename, settings);
 }
 
 
-std::unordered_map<std::string, std::string>& Settings::GetSettings() {
-    return settings;
+std::string Settings::GetSetting(const std::string& key) {
+    return settings[key];
 }
+
+
+void Settings::Save(const std::string &key, const std::string& value) {
+    settings[key] = value;
+}
+
+
+bool Settings::SaveToFile(const std::string& filename) {
+    return Utility::SaveSettingsFile(filename, settings);
+}
+
+

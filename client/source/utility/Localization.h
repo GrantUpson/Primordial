@@ -14,12 +14,11 @@ public:
     Localization() = default;
     ~Localization() = default;
 
-    static bool Load(Languages language);
-    static std::string GetString(std::string id);
+    static bool LoadLanguage(Languages language);
+    static std::string GetString(const std::string& id);
 
 private:
     inline static std::unordered_map<std::string, std::string> strings;
-    static void RetrieveStrings(const std::string& filename);
 };
 
 

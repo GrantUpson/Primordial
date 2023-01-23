@@ -4,6 +4,7 @@
 
 #include "Window.h"
 #include "utility/Settings.h"
+#include "ecs/entt/entt.hpp"
 
 class Game {
 public:
@@ -14,10 +15,15 @@ public:
     void Run();
     void Shutdown();
 
+    void ProcessInput();
+    void ProcessEvents();
+    void Update();
+    void Render(float interpolation);
+
 private:
     bool isRunning;
-    Settings* gameSettings;
     Window* window;
+    entt::registry registry;
 };
 
 
