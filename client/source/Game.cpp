@@ -2,6 +2,7 @@
 #include "utility/Logger.h"
 #include "utility/Localization.h"
 #include <filesystem>
+#include <iostream>
 #include "utility/SystemTimer.h"
 #include "gamestate/GameState.h"
 #include "gamestate/SplashScreenState.h"
@@ -26,8 +27,6 @@ bool Game::Initialize() {
             static_cast<uint32>(std::stoul(Settings::GetSetting("ResolutionWidth"))),
             static_cast<uint32>(std::stoul(Settings::GetSetting("ResolutionHeight"))),
             static_cast<bool>(std::stoi(Settings::GetSetting("VSyncEnabled")))));
-
-
 
     GameState::Initialize(new SplashScreenState);
 
@@ -84,7 +83,7 @@ void Game::ProcessEvents() {
 
 
 void Game::Update() {
-
+    std::cout << "Update\n";
 }
 
 
