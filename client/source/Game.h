@@ -21,9 +21,9 @@ public:
     void Render(float interpolation);
 
 private:
-    bool isRunning;
-    Window* window;
-    entt::registry registry;
+    bool isRunning {};
+    Window* window {};
+    entt::registry registry {};
 };
 
 

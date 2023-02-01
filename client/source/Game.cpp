@@ -1,11 +1,10 @@
 #include "Game.h"
 #include "utility/Logger.h"
-#include "ServerLauncher.h"
 #include "utility/Localization.h"
 #include <filesystem>
-#include <iostream>
-#include "SystemTimer.h"
-#include "ecs/components/TransformComponent.h"
+#include "utility/SystemTimer.h"
+#include "gamestate/GameState.h"
+#include "gamestate/SplashScreenState.h"
 
 
 bool Game::Initialize() {
@@ -28,21 +27,16 @@ bool Game::Initialize() {
             static_cast<uint32>(std::stoul(Settings::GetSetting("ResolutionHeight"))),
             static_cast<bool>(std::stoi(Settings::GetSetting("VSyncEnabled")))));
 
-    //temp
-    for(auto i = 0u; i < 10u; ++i) {
-        const auto entity = registry.create();
-        registry.emplace<TransformComponent>(entity, Vector2(1.0, 1.0), Vector2(1.0, 1.0), 1.0f);
-    }
+
+
+    GameState::Initialize(new SplashScreenState);
 
     return true;
 }
 
-void Game::Run() {
-    if(!ServerLauncher::StartServer()) {
-        Logger::Log("Client - Server launch failed");
-    }
 
-    const uint32 UPDATES_PER_SECOND = 25;
+void Game::Run() {
+    const uint32 UPDATES_PER_SECOND = 30;
     const uint32 SKIP_TICKS = 1000 / UPDATES_PER_SECOND;
     const uint32 MAX_FRAME_SKIP = 5;
 
@@ -54,6 +48,7 @@ void Game::Run() {
         loops = 0;
 
         while(SystemTimer::GetTickCountSinceInitialization() > nextGameUpdate && loops < MAX_FRAME_SKIP) {
+            GameState::GetCurrentGameState()->Update();
             ProcessEvents();
             ProcessInput();
             Update();
@@ -63,7 +58,6 @@ void Game::Run() {
         }
 
         interpolation = float(SystemTimer::GetTickCountSinceInitialization() +  - nextGameUpdate) / float();
-        // view_position = position + (speed * interpolation) for updating rendered things between frames
         Render(interpolation);
     }
 }
@@ -90,17 +84,52 @@ void Game::ProcessEvents() {
 
 
 void Game::Update() {
-    //How some systems could be implemented?
-    auto view = registry.view<TransformComponent>();
 
-    for(auto [entity, transform]: view.each()) {
-        transform.position.x += 0.1;
-        transform.position.y += 0.1;
-    }
 }
 
 
 void Game::Render(float interpolation) {
+    glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
+    glClear(GL_COLOR_BUFFER_BIT);
+
+
+    //TESTING
+    uint32 vertexArray, vertexBuffer, indexBuffer;
+
+    glGenVertexArrays(1, &vertexArray);
+    glBindVertexArray(vertexArray);
+
+    glGenBuffers(1, &vertexBuffer);
+    glBindBuffer(GL_ARRAY_BUFFER, vertexBuffer);
+
+    float vertices[3 * 3] = {
+            -0.5f, -0.5f, 0.0f,
+            0.5f, -0.5f, 0.0f,
+            0.0f, 0.5f, 0.0f
+    };
+
+    glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
+    glEnableVertexAttribArray(0);
+    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), nullptr);
+
+    glGenBuffers(1, &indexBuffer);
+    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, indexBuffer);
+
+    uint32 indices[3] = {0, 1, 2};
+    glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(indices), indices, GL_STATIC_DRAW);
+
+    glBindVertexArray(vertexArray);
+    glDrawElements(GL_TRIANGLES, 3, GL_UNSIGNED_INT, nullptr);
     glfwSwapBuffers(window->GetWindow());
+    // view_position = position + (speed * interpolation) for updating rendered things between frames
 }
 
+
+/*
+    CREATING ENTITIES WITH SPECIFIC COMPONENTS
+    for(auto i = 0u; i < 10u; ++i) {
+        const auto entity = registry.create();
+        registry.emplace<TransformComponent>(entity, Vector2(1.0, 1.0), Vector2(1.0, 1.0), 1.0f);
+    }
+
+ */

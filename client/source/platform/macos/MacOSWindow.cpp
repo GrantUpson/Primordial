@@ -45,6 +45,13 @@ Window::Window(const WindowData* data) {
     }
 
     glfwMakeContextCurrent(window);
+
+    if (!gladLoadGLLoader((GLADloadproc) glfwGetProcAddress)) {
+        glfwTerminate();
+        exit(EXIT_FAILURE);
+    }
+
+    glViewport(0, 0, width, height);
 }
 
 void Window::Close() {

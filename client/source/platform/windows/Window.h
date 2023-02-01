@@ -2,6 +2,7 @@
 #define PRIMORDIAL_WINDOW_H
 
 
+#include "glad/glad.h"
 #include <string>
 #include <utility>
 #include "utility/Utility.h"

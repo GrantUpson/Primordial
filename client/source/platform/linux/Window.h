@@ -5,6 +5,7 @@
 #include <string>
 #include <utility>
 #include "utility/Utility.h"
+#include "glad/glad.h"
 
 struct WindowData {
     std::string title;

@@ -1,0 +1,44 @@
+[Title Menu]
+Title=Primordial
+SinglePlayerButton=Singleplayer
+MultiplayerButton=Multiplayer
+SettingsButton=Settings
+ExitGameButton=Exit Game
+
+[Settings Menu]
+GameplayButton=Gameplay
+GraphicsButton=Graphics
+ControlsButton=Controls
+SoundButton=Sound
+LanguageButton=Language
+BackButton=Back
+
+[Gameplay Menu]
+
+
+[Graphics Menu]
+DisplayMode=Display Mode
+Resolution=Resolution
+VSync=VSync
+
+[Controls Menu]
+
+
+[Sound Menu]
+MasterVolume=Master Volume
+EffectsVolume=Effects Volume
+DialogueVolume=Dialogue Volume
+MusicVolume=Music Volume
+
+[Language]
+English=English
+Chinese=Chinese
+French=French
+German=German
+Italian=Italian
+Japanese=Japanese
+Korean=Korean
+Polish=Polish
+Portuguese=Portuguese
+Russian=Russian
+Spanish=Spanish

@@ -2630,7 +2630,7 @@ GLFWAPI void glfwWindowHintString(int hint, const char* value);
  *  in the Mac Developer Library.
  *
  *  @remark @macos The first time a window is created the menu bar is created.
- *  If GLFW finds a `MainMenu.nib` it is loaded and assumed to contain a menu
+ *  If GLFW finds a `TitleScreenState.nib` it is loaded and assumed to contain a menu
  *  bar.  Otherwise a minimal menu bar is created manually with common commands
  *  like Hide, Quit and About.  The About entry opens a minimal about dialog
  *  with information from the application's bundle.  Menu bar creation can be

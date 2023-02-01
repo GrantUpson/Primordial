@@ -2,6 +2,7 @@
 #include "Window.h"
 #include "utility/Logger.h"
 
+
 static void ErrorCallback(int error, const char* description) {
     Logger::Log("Client - Error " + std::to_string(error) + ": " + std::string(description));
 }
@@ -19,6 +20,9 @@ Window::Window(const WindowData* data) {
         exit(EXIT_FAILURE);
     }
 
+    glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
+    glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
+    glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
     glfwWindowHint(GLFW_RESIZABLE, GL_FALSE);
     glfwWindowHint(GLFW_AUTO_ICONIFY, GL_FALSE);
 
@@ -38,6 +42,14 @@ Window::Window(const WindowData* data) {
     }
 
     glfwMakeContextCurrent(window);
+
+    if (!gladLoadGLLoader((GLADloadproc) glfwGetProcAddress)) {
+        glfwTerminate();
+        exit(EXIT_FAILURE);
+    }
+
+
+    glViewport(0, 0, width, height);
 }
 
 void Window::Close() {
