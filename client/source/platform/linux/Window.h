@@ -2,7 +2,7 @@
 #define PRIMORDIAL_WINDOW_H
 
 
-#include <string>
+
 #include <utility>
 #include "utility/Utility.h"
 #include "glad/glad.h"
@@ -12,8 +12,8 @@ struct WindowData {
     uint32 width;
     uint32 height;
 
-    explicit WindowData(std::string title = "In Darkest Night", uint32 width = 1920, uint32 height = 1080) :
-               title(std::move(title)), width(width), height(height) {}
+    explicit WindowData(std::string title = "Primordial", uint32 width = 1920, uint32 height = 1080) :
+               title(std::move(title)), width(width), height(height) {};
 };
 
 class Window {

@@ -20,6 +20,14 @@ using Vector2 = glm::vec2;
 using Vector3 = glm::vec3;
 using Vector4 = glm::vec4;
 
+using Mat4 = glm::mat4x4;
+
+template <typename T>
+using Reference = std::shared_ptr<T>;
+
+template <typename T>
+using Scope = std::unique_ptr<T>;
+
 
 class Utility {
 public:

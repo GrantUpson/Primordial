@@ -1,8 +1,9 @@
 #include "Renderer2D.h"
+#include "Shader.h"
 
 
 void Renderer2D::Initialize() {
-
+    Shader shader;
 }
 
 

@@ -5,6 +5,8 @@
 #include "utility/SystemTimer.h"
 #include "gamestate/GameState.h"
 #include "gamestate/SplashScreenState.h"
+#include "Buffer.h"
+#include "VertexArray.h"
 
 
 bool Game::Initialize() {
@@ -92,34 +94,37 @@ void Game::Render(float interpolation) {
     glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
     glClear(GL_COLOR_BUFFER_BIT);
 
-
     //TESTING
-    uint32 vertexArray, vertexBuffer, indexBuffer;
-
-    glGenVertexArrays(1, &vertexArray);
-    glBindVertexArray(vertexArray);
-
-    glGenBuffers(1, &vertexBuffer);
-    glBindBuffer(GL_ARRAY_BUFFER, vertexBuffer);
-
-    float vertices[3 * 3] = {
-            -0.5f, -0.5f, 0.0f,
-            0.5f, -0.5f, 0.0f,
-            0.0f, 0.5f, 0.0f
+    float vertices[] = {
+            -0.5f, -0.5f,
+             0.5f, -0.5f,
+             0.5f,  0.5f,
+            -0.5f,  0.5f
     };
 
-    glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
-    glEnableVertexAttribArray(0);
-    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), nullptr);
+    uint32 indices[] = {
+            0, 1, 2,
+            2, 3, 0
+    };
 
-    glGenBuffers(1, &indexBuffer);
-    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, indexBuffer);
+    Reference<VertexArray> va(new VertexArray());
+    Reference<VertexBuffer> vb(new VertexBuffer(vertices, 4 * 2 * sizeof(float)));
 
-    uint32 indices[3] = {0, 1, 2};
-    glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(indices), indices, GL_STATIC_DRAW);
+    std::string name = "Position";
+    //Set the layout of the vertex buffer
+    vb->SetLayout({
+        { BufferElement(name, ShaderDataType::Float2) }
+    });
 
-    glBindVertexArray(vertexArray);
-    glDrawElements(GL_TRIANGLES, 3, GL_UNSIGNED_INT, nullptr);
+    //Add the vertex buffer and its layout to the vertex array
+    va->AddVertexBuffer(vb);
+
+    Reference<IndexBuffer> ib(new IndexBuffer(indices, 6));
+
+    va->SetIndexBuffer(ib);
+    glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, nullptr);
+
+
     glfwSwapBuffers(window->GetWindow());
     // view_position = position + (speed * interpolation) for updating rendered things between frames
 }

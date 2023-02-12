@@ -6,6 +6,9 @@
 
 class Renderer2D {
 public:
+    Renderer2D() = default;
+    ~Renderer2D() = default;
+
     void Initialize();
     void Destroy();
     void BeginScene(/*ortho camera?*/);
