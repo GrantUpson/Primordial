@@ -1,8 +1,9 @@
 import os
 from conans import ConanFile, CMake
-from conans.tools import os_info, SystemPackageTool, ConanException
 from conans import tools, VisualStudioBuildEnvironment
 from conans.tools import build_sln_command, vcvars_command, replace_in_file, download, unzip
+from conans.tools import os_info, SystemPackageTool, ConanException
+
 
 class GlewConan(ConanFile):
     name = "glew"

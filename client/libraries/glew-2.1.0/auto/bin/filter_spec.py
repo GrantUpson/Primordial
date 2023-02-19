@@ -9,7 +9,6 @@ match   = [ 'Name', 'Name String', 'Contact', 'Notice', 'Name Strings', 'Version
 if __name__ == '__main__':
 
   from optparse import OptionParser
-  import os
 
   parser = OptionParser('usage: %prog [options] [SOURCES...]')
   (options, args) = parser.parse_args()

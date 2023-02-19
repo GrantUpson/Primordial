@@ -1,7 +1,5 @@
 #!/usr/bin/python
 
-import re
-import sys
 from xml.dom.minidom import parse, Node
 
 def findChildren(node, path):
@@ -101,7 +99,6 @@ def writeExtension(f, name, extension, enums, commands):
 if __name__ == '__main__':
 
   from optparse import OptionParser
-  import os
 
   parser = OptionParser('usage: %prog [options] [XML specs...]')
   parser.add_option("--core", dest="core", help="location for core outputs", default='')

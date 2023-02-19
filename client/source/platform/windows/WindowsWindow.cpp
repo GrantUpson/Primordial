@@ -1,6 +1,7 @@
 #include <iostream>
 #include "Window.h"
 #include "utility/Logger.h"
+#include "RenderCommand.h"
 
 
 static void ErrorCallback(int error, const char* description) {
@@ -20,8 +21,8 @@ Window::Window(const WindowData* data) {
         exit(EXIT_FAILURE);
     }
 
-    glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
-    glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
+    glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 4);
+    glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 1);
     glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
     glfwWindowHint(GLFW_RESIZABLE, GL_FALSE);
     glfwWindowHint(GLFW_AUTO_ICONIFY, GL_FALSE);
@@ -49,7 +50,7 @@ Window::Window(const WindowData* data) {
     }
 
 
-    glViewport(0, 0, width, height);
+    RenderCommand::SetViewport(0, 0, width, height);
 }
 
 void Window::Close() {
@@ -76,6 +77,7 @@ bool Window::WindowedModeEnabled() const {
 void Window::SetResolution(uint32 newWidth, uint32 newHeight) {
     this->width = newWidth;
     this->height = newHeight;
+    RenderCommand::SetViewport(0, 0, width, height);
 }
 
 GLFWwindow* Window::GetWindow() {

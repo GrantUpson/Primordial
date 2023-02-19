@@ -1,5 +1,6 @@
-from conans import ConanFile, CMake
 import os
+from conans import ConanFile, CMake
+
 
 class TestGlew(ConanFile):
     settings = "os", "compiler", "build_type", "arch"

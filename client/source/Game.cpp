@@ -6,8 +6,9 @@
 #include "utility/SystemTimer.h"
 #include "gamestate/GameState.h"
 #include "gamestate/SplashScreenState.h"
-#include "Buffer.h"
-#include "VertexArray.h"
+#include "rendering/Renderer2D.h"
+#include "RenderCommand.h"
+#include "ecs/systems/TestSystem.h"
 
 
 bool Game::Initialize() {
@@ -30,7 +31,16 @@ bool Game::Initialize() {
             static_cast<uint32>(std::stoul(Settings::GetSetting("ResolutionHeight"))),
             static_cast<bool>(std::stoi(Settings::GetSetting("VSyncEnabled")))));
 
+    Renderer2D::Initialize();
     GameState::Initialize(new SplashScreenState);
+
+    //TEMP
+    eventBus = new EventBus();
+    test = new TestSystem();
+    test->SubscribeToEvents(*eventBus);
+
+
+    //->SubscribeToEvent<CollisionEvent>(this, &DamageSystem::OnCollision);
 
     return true;
 }
@@ -40,6 +50,7 @@ void Game::Run() {
     const uint32 UPDATES_PER_SECOND = 30;
     const uint32 SKIP_TICKS = 1000 / UPDATES_PER_SECOND;
     const uint32 MAX_FRAME_SKIP = 5;
+    uint32 temp = 0;
 
     uint64 nextGameUpdate = SystemTimer::GetTickCountSinceInitialization();
     uint32 loops;
@@ -49,13 +60,19 @@ void Game::Run() {
         loops = 0;
 
         while(SystemTimer::GetTickCountSinceInitialization() > nextGameUpdate && loops < MAX_FRAME_SKIP) {
-            GameState::GetCurrentGameState()->Update();
             ProcessEvents();
             ProcessInput();
-            Update();
-
+            GameState::GetCurrentGameState()->Update();
+            eventBus->DispatchEvent<ResolutionChangedEvent>(1920, 1080);
             nextGameUpdate += SKIP_TICKS;
             loops++;
+            temp++;
+
+            if(temp >= 400) {
+                std::cout << "Unsubscribe";
+                //ResolutionChangedEvent event(0, 0);
+                //Logger::Log("Change it");
+            }
         }
 
         interpolation = float(SystemTimer::GetTickCountSinceInitialization() +  - nextGameUpdate) / float();
@@ -85,47 +102,14 @@ void Game::ProcessEvents() {
 
 
 void Game::Update() {
-    std::cout << "Update\n";
+
 }
 
 
 void Game::Render(float interpolation) {
-    glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
-    glClear(GL_COLOR_BUFFER_BIT);
-
-    //TESTING
-    float vertices[] = {
-            -0.5f, -0.5f,
-             0.5f, -0.5f,
-             0.5f,  0.5f,
-            -0.5f,  0.5f
-    };
-
-    uint32 indices[] = {
-            0, 1, 2,
-            2, 3, 0
-    };
-
-    Reference<VertexArray> va(new VertexArray());
-    Reference<VertexBuffer> vb(new VertexBuffer(vertices, 4 * 2 * sizeof(float)));
-
-    std::string name = "Position";
-    //Set the layout of the vertex buffer
-    vb->SetLayout({
-        { BufferElement(name, ShaderDataType::Float2) }
-    });
-
-    //Add the vertex buffer and its layout to the vertex array
-    va->AddVertexBuffer(vb);
-
-    Reference<IndexBuffer> ib(new IndexBuffer(indices, 6));
-
-    va->SetIndexBuffer(ib);
-    glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, nullptr);
-
-
-    glfwSwapBuffers(window->GetWindow());
-    // view_position = position + (speed * interpolation) for updating rendered things between frames
+    //TODO different rendering systems or one big rendering system called in here that uses the Renderer2D
+    Renderer2D::BeginScene();
+    RenderCommand::SwapBuffers(window->GetWindow());
 }
 
 

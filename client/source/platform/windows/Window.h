@@ -15,7 +15,7 @@ struct WindowData {
     bool vSyncEnabled;
     bool windowedModeEnabled;
 
-    explicit WindowData(std::string title = "Primordial", bool windowedModeEnabled = false, uint32 width = 1920, uint32 height = 1080, bool vSyncEnabled = true) :
+    explicit WindowData(std::string title = "Primordial", bool windowedModeEnabled = false, uint32 width = 640, uint32 height = 360, bool vSyncEnabled = true) :
                title(std::move(title)), windowedModeEnabled(windowedModeEnabled), width(width), height(height), vSyncEnabled(true) {};
 
 };

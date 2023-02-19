@@ -2,8 +2,18 @@
 #define PRIMORDIAL_SHADER_H
 
 
-class Shader {
+#include "utility/Utility.h"
 
+class Shader {
+public:
+    Shader(const std::string& source);
+    ~Shader();
+
+    void Bind() const;
+    void Unbind() const;
+
+private:
+    uint32 rendererID;
 };
 
 

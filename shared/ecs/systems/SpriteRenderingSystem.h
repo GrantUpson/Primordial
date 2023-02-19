@@ -5,6 +5,7 @@
 #include "System.h"
 #include "rendering/Renderer2D.h"
 #include "ecs/entt/entt.hpp"
+#include "events/EventBus.h"
 
 class SpriteRenderingSystem : public System {
 public:
