@@ -7,6 +7,8 @@
 #include "glm/glm.hpp"
 #include "glm/gtc/matrix_transform.hpp"
 #include "ecs/entt/entity/entity.hpp"
+#include "events/Event.h"
+#include "events/FastDelegate.h"
 
 using uint64 = std::uint64_t;
 using uint32 = std::uint32_t;

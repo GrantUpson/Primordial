@@ -11,7 +11,7 @@ struct ResolutionChangedEvent : public Event {
     ResolutionChangedEvent(uint32 width, uint32 height) : width(width), height(height) {}
 
     static EventID GetStaticID() { return EventID::ResolutionChanged; }
-    [[nodiscard]] EventID GetEventID() const override { return GetStaticID(); }
+    [[nodiscard]] EventID const GetEventID() const override { return GetStaticID(); }
 };
 
 
@@ -21,7 +21,7 @@ struct PlayerDeathEvent : public Event {
     PlayerDeathEvent(uint32 id) : id(id) {}
 
     static EventID GetStaticID() { return EventID::PlayerDied; }
-    [[nodiscard]] EventID GetEventID() const override { return GetStaticID(); }
+    [[nodiscard]] EventID const GetEventID() const override { return GetStaticID(); }
 };
 
 

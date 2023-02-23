@@ -12,85 +12,30 @@
 #include "utility/Utility.h"
 
 
-using Callbacks = std::list<std::function<void(Reference<Event>&)>>;
+typedef fastdelegate::FastDelegate1<std::shared_ptr<IEvent>> EventCallback;
 const uint32 NUM_QUEUES {2};
+
 
 class EventSystem {
 public:
-    EventSystem() { activeQueue = 0; }
+    EventSystem() = default;
     ~EventSystem() = default;
 
+    void SubscribeToEvent(EventID id, EventCallback& callback);
+    void UnsubscribeToEvent(EventID id, const EventCallback& callback);
 
-    void SubscribeToEvent(EventID id, std::function<void(Reference<Event>&)> callback) {
-        if(!subscribers[id]) {
-            subscribers[id] = std::make_unique<Callbacks>();
-        }
+    void QueueEvent(const Reference<Event>& event);
+    void DispatchEvent(Reference<Event>& event);
+    void CancelEvent(EventID eventID, bool allOfType = false);
 
-        subscribers[id]->push_back(std::move(callback));
-    }
-
-
-    void UnsubscribeToEvent(EventID id, std::function<void(Reference<Event>&)> callback) {
-        auto handlers = subscribers[id].get();
-
-       // handlers->remove(callback);
-    }
-
-
-    void QueueEvent(const Reference<Event>& event) {
-        eventQueue[activeQueue].push_back(event);s
-    }
-
-
-    void DispatchEvent(Reference<Event>& event) {
-        auto handlers = subscribers[event->GetEventID()].get();
-
-        if(handlers) {
-            for(auto& it : *handlers) {
-                it(event);
-            }
-        }
-    }
-
-
-    void CancelEvent(EventID eventID, bool allOfType = false) {
-        auto it = eventQueue[activeQueue].begin();
-
-        while(it != eventQueue[activeQueue].end()) {
-            EventID x = it->get()->GetEventID();
-            if(x == eventID) {
-                std::cout << "FOUND!";
-                it = eventQueue[activeQueue].erase(it);
-
-                if(!allOfType) { break; }
-            } else {
-                it++;
-            }
-        }
-    }
-
-
-    void ProcessEvents() {
-        uint32 queueToProcess = activeQueue;
-        activeQueue = (activeQueue + 1) % NUM_QUEUES;
-        eventQueue[activeQueue].clear();
-
-        while(!eventQueue[queueToProcess].empty()) {
-            Reference<Event> event = eventQueue[queueToProcess].front();
-            eventQueue[queueToProcess].pop_front();
-
-            DispatchEvent(event);
-        }
-    }
-
-
-    void Clear() { subscribers.clear(); }
+    void ProcessEvents();
+    void ClearEvents();
 
 private:
-    uint32 activeQueue {};
+    uint32 activeQueue {0};
 
     std::list<Reference<Event>> eventQueue[NUM_QUEUES];
-    std::map<EventID, Scope<Callbacks>> subscribers;
+    std::map<EventID, std::list<EventCallback>> subscribers;
 };
 
 

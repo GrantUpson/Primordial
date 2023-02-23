@@ -28,12 +28,11 @@ void SpriteRenderingSystem::Update(entt::registry &registry) {
 
 
 void SpriteRenderingSystem::SubscribeToEvents(EventSystem &eventBus) {
-    std::function<void(Reference<Event>&)> callback = [this](auto && PH1) { OnDeath(std::forward<decltype(PH1)>(PH1)); };
+    EventCallback callback = fastdelegate::MakeDelegate(this, &SpriteRenderingSystem::OnDeath);
     eventBus.SubscribeToEvent(EventID::PlayerDied, callback);
 }
 
 
 void SpriteRenderingSystem::OnDeath(const Reference<Event> &event) {
-    Reference<PlayerDeathEvent> eventData = std::static_pointer_cast<PlayerDeathEvent>(event);
     std::cout << "On Death! ID: \n" + std::to_string(eventData->id);
 }
