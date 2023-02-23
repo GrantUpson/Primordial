@@ -3,8 +3,8 @@ project(PrimordialServer LANGUAGES CXX VERSION 1.0.0)
 
 set(CMAKE_CXX_STANDARD 23)
 set(SOURCE_FILES source/Main.cpp ../shared/events/Event.h ../shared/utility/Utility.h
-        ../shared/events/EventBus.cpp
-        ../shared/events/EventBus.h source/Server.cpp source/Server.h ../shared/utility/Settings.cpp ../shared/utility/Settings.h ../shared/utility/Logger.cpp ../shared/utility/Logger.h ../shared/utility/Utility.cpp ../shared/utility/SystemTimer.h ../shared/ecs/components/TransformComponent.h ../shared/gamestate/State.h ../shared/ecs/components/SpriteComponent.h ../shared/ecs/systems/System.h)
+        ../shared/events/EventSystem.cpp
+        ../shared/events/EventSystem.h source/Server.cpp source/Server.h ../shared/utility/Settings.cpp ../shared/utility/Settings.h ../shared/utility/Logger.cpp ../shared/utility/Logger.h ../shared/utility/Utility.cpp ../shared/utility/SystemTimer.h ../shared/ecs/components/TransformComponent.h ../shared/gamestate/State.h ../shared/ecs/components/SpriteComponent.h ../shared/ecs/systems/System.h)
 
 include_directories(${CMAKE_SOURCE_DIR}/libraries/glm)
 include_directories(${CMAKE_SOURCE_DIR}/shared)

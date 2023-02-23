@@ -5,18 +5,22 @@
 #include "System.h"
 #include "rendering/Renderer2D.h"
 #include "ecs/entt/entt.hpp"
-#include "events/EventBus.h"
+#include "events/EventSystem.h"
 
 class SpriteRenderingSystem : public System {
 public:
-    SpriteRenderingSystem(Renderer2D* renderer);
+    SpriteRenderingSystem();
     ~SpriteRenderingSystem();
 
+    void SubscribeToEvents(EventSystem& eventBus);
     void Update(entt::registry& registry) override;
 
 private:
     Renderer2D* renderer;
+
+    void OnDeath(const Reference<Event>& event);
 };
 
 
 #endif
+

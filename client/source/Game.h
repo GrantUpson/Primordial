@@ -5,8 +5,9 @@
 #include "Window.h"
 #include "utility/Settings.h"
 #include "ecs/entt/entt.hpp"
-#include "events/EventBus.h"
+#include "events/EventSystem.h"
 #include "ecs/systems/TestSystem.h"
+#include "ecs/systems/SpriteRenderingSystem.h"
 
 class Game {
 public:
@@ -26,8 +27,9 @@ private:
     bool isRunning {};
     Window* window {};
     entt::registry registry {};
-    EventBus* eventBus {};
+    EventSystem* eventBus {};
     TestSystem* test {};
+    SpriteRenderingSystem* test2 {};
 };
 
 

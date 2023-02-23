@@ -2,19 +2,20 @@
 #define PRIMORDIAL_TESTSYSTEM_H
 
 
-#include "events/EventBus.h"
+#include "events/EventSystem.h"
 #include "System.h"
+#include "events/ApplicationEvent.h"
 
 class TestSystem : public System {
 public:
     TestSystem() = default;
     ~TestSystem() = default;
 
-    void SubscribeToEvents(EventBus& eventBus);
+    void SubscribeToEvents(EventSystem& eventBus);
     void Update(entt::registry &registry) override;
 
 private:
-    void OnTest(ResolutionChangedEvent& event);
+    void OnTest(const Reference<Event>& event);
 };
 
 

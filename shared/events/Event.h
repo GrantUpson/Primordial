@@ -6,29 +6,24 @@
 #include "ecs/entt/entt.hpp"
 
 
+enum class EventID {
+    None = 0, ResolutionChanged, Collision,
+
+    PlayerDied
+};
+
+
+/*class IEvent {
+public:
+    [[nodiscard]] virtual const EventID GetEventID() const = 0;
+};*/
+
+
 class Event {
 public:
-    Event() = default;
+    [[nodiscard]] virtual EventID GetEventID() const = 0;
 };
 
-
-/* All Game Events */
-
-
-struct ResolutionChangedEvent : public Event {
-    uint32 width;
-    uint32 height;
-
-    ResolutionChangedEvent(uint32 width, uint32 height) : width(width), height(height) {}
-};
-
-
-struct CollisionEvent : public Event {
-    Entity a;
-    Entity b;
-
-    CollisionEvent(Entity a, Entity b) : a(a), b(b) {}
-};
 
 
 #endif

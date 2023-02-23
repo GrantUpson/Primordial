@@ -2,15 +2,18 @@
 #include "TestSystem.h"
 #include "RenderCommand.h"
 #include "utility/Logger.h"
+#include "events/ApplicationEvent.h"
 
-void TestSystem::SubscribeToEvents(EventBus &eventBus) {
-    eventBus.SubscribeToEvent<ResolutionChangedEvent>(this, &TestSystem::OnTest);
+void TestSystem::SubscribeToEvents(EventSystem &eventBus) {
+    std::function<void(Reference<Event>&)> callback = [this](auto && PH1) { OnTest(std::forward<decltype(PH1)>(PH1)); };
+    eventBus.SubscribeToEvent(EventID::ResolutionChanged, callback);
 }
 
 
-void TestSystem::OnTest(ResolutionChangedEvent& event) {
-    //RenderCommand::SetViewport(0, 0, event.width, event.height);
-    std::cout << "OnTest Called\n";
+void TestSystem::OnTest(const Reference<Event>& event) {
+    Reference<ResolutionChangedEvent> eventData = std::static_pointer_cast<ResolutionChangedEvent>(event);
+
+    std::cout << "OnTest! Width: " + std::to_string(eventData->width) << " Width: " + std::to_string(eventData->height);
 }
 
 void TestSystem::Update(entt::registry &registry) {

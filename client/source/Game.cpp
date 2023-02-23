@@ -35,9 +35,11 @@ bool Game::Initialize() {
     GameState::Initialize(new SplashScreenState);
 
     //TEMP
-    eventBus = new EventBus();
+    eventBus = new EventSystem();
     test = new TestSystem();
+    test2 = new SpriteRenderingSystem();
     test->SubscribeToEvents(*eventBus);
+    test2->SubscribeToEvents(*eventBus);
 
 
     //->SubscribeToEvent<CollisionEvent>(this, &DamageSystem::OnCollision);
@@ -63,15 +65,17 @@ void Game::Run() {
             ProcessEvents();
             ProcessInput();
             GameState::GetCurrentGameState()->Update();
-            eventBus->DispatchEvent<ResolutionChangedEvent>(1920, 1080);
+            eventBus->QueueEvent(std::make_shared<ResolutionChangedEvent>(temp, 1080));
             nextGameUpdate += SKIP_TICKS;
             loops++;
             temp++;
 
-            if(temp >= 400) {
-                std::cout << "Unsubscribe";
-                //ResolutionChangedEvent event(0, 0);
-                //Logger::Log("Change it");
+            if(temp >= 20) {
+                eventBus->QueueEvent(std::make_shared<PlayerDeathEvent>(11));
+            }
+
+            if(temp >= 30) {
+                eventBus->CancelEvent(EventID::PlayerDied);
             }
         }
 
@@ -97,7 +101,7 @@ void Game::ProcessInput() {
 
 
 void Game::ProcessEvents() {
-
+    eventBus->ProcessEvents();
 }
 
 
