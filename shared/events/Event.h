@@ -13,12 +13,6 @@ enum class EventID {
 };
 
 
-class IEvent {
-public:
-    [[nodiscard]] virtual const EventID GetEventID() const = 0;
-};
-
-
 class Event {
 public:
     [[nodiscard]] virtual const EventID GetEventID() const = 0;

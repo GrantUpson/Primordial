@@ -9,13 +9,13 @@
 class TestSystem : public System {
 public:
     TestSystem() = default;
-    ~TestSystem() = default;
+    ~TestSystem();
 
     void SubscribeToEvents(EventSystem& eventBus);
     void Update(entt::registry &registry) override;
 
 private:
-    void OnTest(const Reference<Event>& event);
+    void OnTest(Reference<Event> event);
 };
 
 

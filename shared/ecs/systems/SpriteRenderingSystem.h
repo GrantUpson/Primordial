@@ -12,13 +12,8 @@ public:
     SpriteRenderingSystem();
     ~SpriteRenderingSystem();
 
-    void SubscribeToEvents(EventSystem& eventBus);
+    void SubscribeToEvents(EventSystem& eventSystem);
     void Update(entt::registry& registry) override;
-
-private:
-    Renderer2D* renderer;
-
-    void OnDeath(const Reference<Event>& event);
 };
 
 

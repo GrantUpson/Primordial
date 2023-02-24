@@ -35,14 +35,11 @@ bool Game::Initialize() {
     GameState::Initialize(new SplashScreenState);
 
     //TEMP
-    eventBus = new EventSystem();
+    //eventBus = new EventSystem();
     test = new TestSystem();
     test2 = new SpriteRenderingSystem();
-    test->SubscribeToEvents(*eventBus);
-    test2->SubscribeToEvents(*eventBus);
-
-
-    //->SubscribeToEvent<CollisionEvent>(this, &DamageSystem::OnCollision);
+    test->SubscribeToEvents(EventSystem::GetInstance());
+    test2->SubscribeToEvents(EventSystem::GetInstance());
 
     return true;
 }
@@ -65,17 +62,18 @@ void Game::Run() {
             ProcessEvents();
             ProcessInput();
             GameState::GetCurrentGameState()->Update();
-            eventBus->QueueEvent(std::make_shared<ResolutionChangedEvent>(temp, 1080));
+            EventSystem::GetInstance().QueueEvent(std::make_shared<PlayerDeathEvent>(11));
+
             nextGameUpdate += SKIP_TICKS;
             loops++;
             temp++;
 
             if(temp >= 20) {
-                eventBus->QueueEvent(std::make_shared<PlayerDeathEvent>(11));
+                EventSystem::GetInstance().QueueEvent(std::make_shared<ResolutionChangedEvent>(temp, 1080));
             }
 
             if(temp >= 30) {
-                eventBus->CancelEvent(EventID::PlayerDied);
+                EventSystem::GetInstance().CancelEvent(EventID::PlayerDied);
             }
         }
 
@@ -86,6 +84,7 @@ void Game::Run() {
 
 
 void Game::Shutdown() {
+    EventSystem::GetInstance().ClearEvents();
     window->Close();
     Settings::SaveToFile(std::filesystem::current_path().string() + "/Data/Settings.configuration"); //TODO get path string elsewhere?
 }
@@ -101,7 +100,7 @@ void Game::ProcessInput() {
 
 
 void Game::ProcessEvents() {
-    eventBus->ProcessEvents();
+    EventSystem::GetInstance().ProcessEvents();
 }
 
 

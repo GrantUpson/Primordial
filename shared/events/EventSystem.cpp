@@ -10,7 +10,7 @@ void EventSystem::UnsubscribeToEvent(const EventID id, const EventCallback& call
     auto handlers = subscribers.find(id);
 
     if(handlers != subscribers.end()) {
-        std::list<EventCallback> callbacks = handlers->second;
+        std::list<EventCallback>& callbacks = handlers->second;
 
         for(auto it = callbacks.begin(); it != callbacks.end(); ++it) {
             if(callback == (*it)) {
@@ -30,10 +30,13 @@ void EventSystem::QueueEvent(const Reference<Event>& event) {
 void EventSystem::DispatchEvent(Reference<Event>& event) {
     auto handlers = subscribers.find(event->GetEventID());
 
-    std::list<EventCallback> callbacks = handlers->second;
+    if(handlers != subscribers.end()) {
+        std::list<EventCallback> callbacks = handlers->second;
 
-    for(const EventCallback& callback : callbacks) {
-        callback(event);
+        for(std::list<EventCallback>::const_iterator it = callbacks.begin(); it != callbacks.end(); ++it) {
+            const EventCallback& callback = (*it);
+            callback(event);
+        }
     }
 }
 
@@ -45,7 +48,6 @@ void EventSystem::CancelEvent(EventID eventID, bool allOfType) {
         EventID x = it->get()->GetEventID();
 
         if(x == eventID) {
-            std::cout << "FOUND!";
             it = eventQueue[activeQueue].erase(it);
 
             if(!allOfType) {

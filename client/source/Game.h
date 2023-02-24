@@ -27,7 +27,6 @@ private:
     bool isRunning {};
     Window* window {};
     entt::registry registry {};
-    EventSystem* eventBus {};
     TestSystem* test {};
     SpriteRenderingSystem* test2 {};
 };
