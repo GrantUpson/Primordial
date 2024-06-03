@@ -38,5 +38,4 @@
 *.idea/
 
 # Build directories
-builds/debug/
-builds/release/
+builds/*

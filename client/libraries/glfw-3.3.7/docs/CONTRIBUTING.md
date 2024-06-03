@@ -21,7 +21,7 @@
 
 Questions about how to use GLFW should be asked either in the [support
 section](https://discourse.glfw.org/c/support) of the forum, under the [Stack
-Overflow tag](https://stackoverflow.com/questions/tagged/glfw) or [Game
+Overflow tag](https://stackoverflow.com/questions/tagged/glfw) or [Client
 Development tag](https://gamedev.stackexchange.com/questions/tagged/glfw) on
 Stack Exchange or in the IRC channel `#glfw` on
 [Libera.Chat](https://libera.chat/).
