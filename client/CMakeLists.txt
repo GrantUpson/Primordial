@@ -27,6 +27,7 @@ set(SOURCE_FILES
         ../shared/libraries/simple_ini/convert_utf.c
         source/utility/settings.cpp
         source/client_status.cpp
+        ../shared/source/networking/socket_address.cpp
 )
 
 set(HEADER_FILES
@@ -46,6 +47,9 @@ set(HEADER_FILES
         ../shared/libraries/simple_ini/simple_ini.h
         ../shared/libraries/simple_ini/convert_utf.h
         includes/client_status.h
+        ../shared/includes/networking/udp_socket.h
+        ../shared/includes/networking/socket_address.h
+        ../shared/includes/networking/networking_utilities.h
 )
 
 #Specific platform only includes and files
@@ -62,6 +66,8 @@ if(WIN32)
             source/rendering/opengl/shader.cpp
             source/rendering/opengl/vertex_array.cpp
             source/rendering/opengl/vertex_buffer.cpp
+            ../shared/source/platform/windows/windows_udp_socket.cpp
+            ../shared/source/platform/windows/windows_networking_utilities.cpp
     )
 
     SET(HEADER_FILES ${HEADER_FILES}
@@ -89,6 +95,8 @@ elseif(APPLE)
             source/rendering/opengl/shader.cpp
             source/rendering/opengl/vertex_array.cpp
             source/rendering/opengl/vertex_buffer.cpp
+            ../shared/source/platform/macos/macos_udp_socket.cpp
+            ../shared/source/platform/macos/macos_networking_utilities.cpp
     )
 
     SET(HEADER_FILES ${HEADER_FILES}
@@ -113,6 +121,8 @@ elseif(UNIX AND NOT APPLE)
             source/rendering/opengl/shader.cpp
             source/rendering/opengl/vertex_array.cpp
             source/rendering/opengl/vertex_buffer.cpp
+            ../shared/source/platform/linux/linux_udp_socket.cpp
+            ../shared/source/platform/linux/linux_networking_utilities.cpp
     )
 
     SET(HEADER_FILES ${HEADER_FILES}
