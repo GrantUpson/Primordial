@@ -7,9 +7,9 @@ void Logger::Log(const std::string& message, bool append) {
     std::ofstream logFile;
 
     if(append) {
-        logFile.open(std::filesystem::current_path().string() + "/Log/log.txt", std::ios_base::app);
+        logFile.open(std::filesystem::current_path().string() + "/log/log.txt", std::ios_base::app);
     } else {
-        logFile.open(std::filesystem::current_path().string() + "/Log/log.txt");
+        logFile.open(std::filesystem::current_path().string() + "/log/log.txt");
     }
 
     logFile << GetCurrentDateTime() + message + "\n";

@@ -7,7 +7,7 @@ int main(int argc, char *argv[]) {
     ClientStatus result = client.Initialize();
 
     if(result != ClientStatus::Initialized) {
-        Logger::Log("Client failed to initialize with error code: " + std::to_string(result));
+        Logger::Log(ClientStatusToString(result));
         return result;
     } else {
         client.Run();

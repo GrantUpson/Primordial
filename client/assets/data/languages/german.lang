@@ -1,44 +1,44 @@
 [Title Menu]
 Title=Primordial
-SinglePlayerButton=Einzelspieler
-MultiplayerButton=Mehrspieler
-SettingsButton=Einstellungen
-ExitGameButton=Spiel verlassen
+SinglePlayerButton = Einzelspieler
+MultiplayerButton = Mehrspieler
+SettingsButton = Einstellungen
+ExitGameButton = Spiel verlassen
 
 [Settings Menu]
-GameplayButton=Spielweise
-GraphicsButton=Grafik
-ControlsButton=Kontrollen
-SoundButton=Klang
-LanguageButton=Sprache
-BackButton=Der Rücken
+GameplayButton = Spielweise
+GraphicsButton = Grafik
+ControlsButton = Kontrollen
+SoundButton = Klang
+LanguageButton = Sprache
+BackButton = Der Rücken
 
 [Gameplay Menu]
 
 
 [Graphics Menu]
-DisplayMode=Anzeigemodus
-Resolution=Auflösung
+DisplayMode = Anzeigemodus
+Resolution = Auflösung
 VSync=VSync
 
 [Controls Menu]
 
 
 [Sound Menu]
-MasterVolume=Master-Lautstärke
-EffectsVolume=Effektlautstärke
-DialogueVolume=Dialoglautstärke
-MusicVolume=Musik Volumen
+MasterVolume = Master-Lautstärke
+EffectsVolume = Effektlautstärke
+DialogueVolume = Dialoglautstärke
+MusicVolume = Musik Volumen
 
 [Language]
-English=English
-Chinese=Chinese
-French=French
-German=German
-Italian=Italian
-Japanese=Japanese
-Korean=Korean
-Polish=Polish
-Portuguese=Portuguese
-Russian=Russian
-Spanish=Spanish
+English = English
+Chinese = Chinese
+French = French
+German = German
+Italian = Italian
+Japanese = Japanese
+Korean = Korean
+Polish = Polish
+Portuguese = Portuguese
+Russian = Russian
+Spanish = Spanish

@@ -6,8 +6,8 @@
 
 enum ServerStatus : uint8 {
     Initialized = 0,
-    SettingsFileNotFound = 1,
-    InvalidSettingsFile = 2,
+    ConfigFileNotFound = 1,
+    InvalidConfigFile = 2,
     MemoryAllocationFailure = 3
 };
 

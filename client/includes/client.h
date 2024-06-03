@@ -1,12 +1,8 @@
 #ifndef PRIMORDIAL_CLIENT_H
 #define PRIMORDIAL_CLIENT_H
 
-
 #include "window.h"
-
-enum ClientStatus : uint8 {
-    Initialized = 0
-};
+#include "client_status.h"
 
 
 class Client {

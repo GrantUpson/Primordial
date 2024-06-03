@@ -24,6 +24,9 @@ set(SOURCE_FILES
         source/utility/localization.cpp
         ../shared/source/utility/logger.cpp
         libraries/glad/src/glad.c
+        ../shared/libraries/simple_ini/convert_utf.c
+        source/utility/settings.cpp
+        source/client_status.cpp
 )
 
 set(HEADER_FILES
@@ -40,6 +43,9 @@ set(HEADER_FILES
         ../shared/includes/types.h
         ../shared/includes/utility/logger.h
         ../shared/includes/utility/system_timer.h
+        ../shared/libraries/simple_ini/simple_ini.h
+        ../shared/libraries/simple_ini/convert_utf.h
+        includes/client_status.h
 )
 
 #Specific platform only includes and files
@@ -115,6 +121,7 @@ elseif(UNIX AND NOT APPLE)
             includes/rendering/opengl/shader.h
             includes/rendering/opengl/index_buffer.h
             includes/rendering/opengl/vertex_buffer.h
+            includes/utility/settings.h
     )
 
 

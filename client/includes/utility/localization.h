@@ -3,22 +3,28 @@
 
 #include <string>
 #include <unordered_map>
+#include "client_status.h"
+
 
 enum Languages {
-    ENGLISH = 0, CHINESE = 1, RUSSIAN = 2, SPANISH = 3, GERMAN = 4, FRENCH = 5,
-    PORTUGUESE = 6, JAPANESE = 7, ITALIAN = 8, KOREAN = 9, POLISH = 10
+    English = 0, Chinese = 1, Russian = 2, Spanish = 3, German = 4, French = 5,
+    Portuguese = 6, Japanese = 7, Italian = 8, Korean = 9, Polish = 10
 };
+
 
 class Localization {
 public:
-    Localization() = default;
-    ~Localization() = default;
+    static constexpr const char* LANGUAGES_FILEPATH = "/data/languages/";
 
-    static bool LoadLanguage(Languages language);
+    static ClientStatus LoadLanguage(Languages language);
     static std::string GetString(const std::string& id);
 
+    Localization() = delete;
+    ~Localization() = delete;
+
 private:
-    inline static std::unordered_map<std::string, std::string> strings;
+    static std::unordered_map<std::string, std::string> strings;
+    static ClientStatus LoadFile(const std::string& filepath);
 };
 
 

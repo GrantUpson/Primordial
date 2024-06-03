@@ -1,40 +1,31 @@
+#include <print>
 #include "client.h"
 #include "utility/localization.h"
 #include "utility/system_timer.h"
 #include "gamestate/game_state.h"
 #include "gamestate/splash_screen_state.h"
-
+#include "utility/settings.h"
 
 
 ClientStatus Client::Initialize() {
     isRunning = true;
 
-    /*
-    if(!Settings::Load(std::filesystem::current_path().string() + "/Data/Settings.configuration")) { //TODO get path string elsewhere?
-        Logger::Log("Client - Could not load settings file.");
-        return false;
+    ClientStatus result = Settings::LoadSettings();
+    if(result != Initialized) {
+        return result;
     }
 
-    if(!Localization::LoadLanguage(static_cast<Languages>(std::stoi(Settings::GetSetting("Language"))))) {
-        Logger::Log("Client - Could not load language file.");
-        return false;
+    result = Localization::LoadLanguage(Settings::gameplay.language);
+    if(result != Initialized) {
+        return result;
     }
 
     window = new Window(new WindowData(
             Localization::GetString("Title"),
-            static_cast<bool>(std::stoi(Settings::GetSetting("WindowedModeEnabled"))),
-            static_cast<uint32>(std::stoul(Settings::GetSetting("ResolutionWidth"))),
-            static_cast<uint32>(std::stoul(Settings::GetSetting("ResolutionHeight"))),
-            static_cast<bool>(std::stoi(Settings::GetSetting("VSyncEnabled")))));
-    */
-
-    window = new Window(new WindowData(
-            Localization::GetString("Title"),
-            true,
-            1920,
-            1080,
-            true));
-
+            Settings::graphics.windowedMode,
+            Settings::graphics.resolutionWidth,
+            Settings::graphics.resolutionHeight,
+            Settings::graphics.vSync));
 
     GameState::Initialize(new SplashScreenState);
 
@@ -72,8 +63,8 @@ void Client::Run() {
 
 
 void Client::Shutdown() {
+    Settings::SaveSettings();
     window->Close();
-    //TODO Save game settings
 }
 
 
